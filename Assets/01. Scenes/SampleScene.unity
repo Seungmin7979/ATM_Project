@@ -2511,6 +2511,8 @@ MonoBehaviour:
   buttonController: {fileID: 8292542}
   deposit: {fileID: 1290613232}
   withdrawal: {fileID: 1533769423}
+  errorPanel: {fileID: 1761289429}
+  exitButton: {fileID: 1443191319}
   deposit1: {fileID: 2028446645}
   deposit2: {fileID: 1485694619}
   deposit3: {fileID: 1152213420}
@@ -2521,8 +2523,6 @@ MonoBehaviour:
   withdrawal3: {fileID: 406047623}
   withdrawal4: {fileID: 1193834212}
   inputWithdrawal: {fileID: 753355514}
-  errorPanel: {fileID: 1761289429}
-  exitButton: {fileID: 1443191319}
 --- !u!1 &896584822
 GameObject:
   m_ObjectHideFlags: 0
