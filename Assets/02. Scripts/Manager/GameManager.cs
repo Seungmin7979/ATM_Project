@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
     public UserData userData;
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI cashText;
     [SerializeField] private TextMeshProUGUI balanceText;
+
+    private string savePath;
 
     private void Awake()
     {
@@ -18,6 +20,10 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            savePath = Path.Combine(Application.persistentDataPath, "userdata.json");
+
+            LoadUserData();
         }
 
         else
@@ -25,13 +31,35 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        userData = new UserData("½Å½Â¹Î", 100000, 50000);
     }
 
     private void Start()
     {
         Refresh();
+    }
+
+    public void SaveUserData()
+    {
+        string json = JsonUtility.ToJson(userData, true);
+        File.WriteAllText(savePath, json);
+
+        Debug.Log("ÀúÀå¿Ï·á: " + savePath);
+    }
+
+    public void LoadUserData()
+    {
+        if (File.Exists(savePath))
+        {
+            string json = File.ReadAllText(savePath);
+            userData = JsonUtility.FromJson<UserData>(json);
+            Debug.Log("·Îµå ¿Ï·á: " + savePath);
+        }
+
+        else
+        {
+            userData = new UserData("½Å½Â¹Î", 100000, 50000);
+            SaveUserData();
+        }
     }
 
     public void Refresh()

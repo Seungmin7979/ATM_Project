@@ -14,6 +14,9 @@ public class PopupBank : MonoBehaviour
     [SerializeField] private GameObject deposit;
     [SerializeField] private GameObject withdrawal;
 
+    [SerializeField] private GameObject errorPanel;
+    [SerializeField] private Button exitButton;
+
     [Header("Deposit")]
     [SerializeField] private Button deposit1;
     [SerializeField] private Button deposit2;
@@ -27,9 +30,6 @@ public class PopupBank : MonoBehaviour
     [SerializeField] private Button withdrawal3;
     [SerializeField] private Button withdrawal4;
     [SerializeField] private Text inputWithdrawal;
-
-    [SerializeField] private GameObject errorPanel;
-    [SerializeField] private Button exitButton;
 
 
     private void Start()
@@ -82,6 +82,7 @@ public class PopupBank : MonoBehaviour
             info.bankBalance += amount;
 
             GameManager.Instance.Refresh();
+            GameManager.Instance.SaveUserData();
         }
 
         else
@@ -100,6 +101,7 @@ public class PopupBank : MonoBehaviour
             info.cash += amount;
 
             GameManager.Instance.Refresh();
+            GameManager.Instance.SaveUserData();
         }
 
         else
